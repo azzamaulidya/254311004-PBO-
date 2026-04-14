@@ -28,3 +28,38 @@ abstract class LayananTransportasi {
         System.out.println();
     }
 }
+
+class MadiunMotor extends LayananTransportasi {
+
+    public MadiunMotor(String namaDriver, double jarak, double saldoUser) {
+        super(namaDriver, jarak, saldoUser);
+    }
+
+    @Override
+    public double hitungTarif() {
+        return jarak * 2500;
+    }
+}
+
+class MadiunMobil extends LayananTransportasi {
+
+    private String nim;
+
+    public MadiunMobil(String namaDriver, double jarak, double saldoUser, String nim) {
+        super(namaDriver, jarak, saldoUser);
+        this.nim = nim;
+    }
+    
+    private int ambil2DigitTerakhir() {
+        return Integer.parseInt(nim.substring(nim.length() - 2));
+    }
+
+    private double hitungBiayaAdmin() {
+        return 3000 + (ambil2DigitTerakhir() * 100);
+    }
+
+    @Override
+    public double hitungTarif() {
+        return (jarak * 5000) + hitungBiayaAdmin();
+    }
+}
